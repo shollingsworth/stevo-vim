@@ -1,0 +1,174 @@
+"set noswapfile
+set previewheight=100
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Load Pathogen stuff and related                                            "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"All plugins should go into the ~/.vim/bundle directory
+execute pathogen#infect()
+execute pathogen#helptags()
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Default Options                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype on
+syntax enable
+filetype plugin on
+"disabled due to html/php files not indenting properly
+"filetype indent on
+set nocompatible
+set autoread 
+set autoindent
+set expandtab
+set modeline
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+filetype plugin indent on
+set regexpengine=1
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+"markdown
+let g:vim_markdown_folding_disabled = 1
+
+""############################################################################
+" pymod
+""############################################################################
+let g:pymode_run_bind = "<C-S-e>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                       AutoBuild Scripts and mapping                        "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType * exe('let comp_cmd="!~/.vim/bin/build_' . &filetype . '.sh ' . expand("%:p") . '"')
+autocmd FileType * exe('let run_cmd="!~/.vim/bin/build_' . &filetype . '.sh ' . expand("%:p") . ' \|less -cN"')
+map z :exec comp_cmd<enter><enter>
+map R :exec run_cmd<enter><enter>
+set pastetoggle=<F2>
+
+autocmd FileType mail set spell
+autocmd Filetype yaml set shiftwidth=2
+autocmd Filetype yaml set softtabstop=2
+autocmd Filetype yaml set tabstop=2
+autocmd BufNewFile,BufRead *.pgsql set filetype=pgsql "Set postgres filetype
+
+autocmd FileType * exe('let edit_snip="!vim ~/.vim/mysnips/' . &filetype . '.snippets"')
+autocmd FileType * exe('let edit_dict="!vim ~/.vim/dict_files/' . &filetype . '.dict"')
+autocmd FileType * exe('let edit_scratch="!vim ~/.vim/scratch_files/scratch.' . &filetype . '"')
+autocmd FileType * exe('let scratch_file="~/.vim/scratch_files/scratch.' . &filetype . '"')
+autocmd Filetype * exe('let cmd_append_scratch=":w! >> ' . scratch_file . '"')
+map E :exec edit_snip<enter><enter>
+map T :exec edit_dict<enter><enter>
+vmap <C-m> :call AppendScratch()<enter>
+map <C-c> :call CatScratch()<enter>
+map <C-n> :exec edit_scratch<enter><enter>
+
+
+""                           Source Misc Directory                            "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+for f in split(glob('~/.vim/sourced_vimscript/*.vim'), '\n')
+   exe 'source' f
+endfor
+
+" python opts
+let g:pymode = 1
+"pymode rope options
+let g:pymode_rope = 1
+let g:pymode_rope_completion = 1
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_rope_autoimport_modules = ['os', 'shutil', 'datetime']
+let g:pymode_rope_project_root = "~/pymode_rope"
+let g:pymode_rope_lookup_project = 1
+let g:pymode_rope_autoimport = 1
+
+
+"pymode run
+let g:pymode_run = 1
+let g:pymode_run_bind = '<s-r>'
+
+"other
+let g:pymode_trim_whitespaces = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                 Set Custom Filetype mappings for filetype                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.ci set filetype=pascal
+au BufNewFile,BufRead *.gss set filetype=css
+au BufNewFile,BufRead *.phpt set filetype=php
+au BufNewFile,BufRead *.json set filetype=json
+au BufNewFile,BufRead *.confl set filetype=confluence
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""                         Load all Dictionary Items                          "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""enabled dict completion
+set complete+=k
+"custom Auto Dictionary files depending on the filetype
+autocmd FileType * exe('setl dict+=~/.vim/dict_files/' . &filetype . '.dict')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               My Vim bundles and Variables                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"UltiSnips
+   set runtimepath+=~/.vim/mysnips
+   let g:UltiSnipsExpandTrigger="<tab>"
+   let g:UltiSnipsListSnippets="<c-l>"
+   let g:UltiSnipsJumpForwardTrigger="<tab>"
+   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+   let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+   let g:UltiSnipsSnippetDirectories=["mysnips"]
+   "let g:UltiSnipsSnippetDirectories=["UltiSnips","mysnips"]
+
+"DelimitMate
+   let delimitMate_expand_cr = 1
+
+"SuperTab
+   let g:SuperTabClosePreviewOnPopupClose = 1 " close scratch window on autocompletion"
+   highlight Pmenu ctermbg=white gui=bold
+   let g:SuperTabCrMapping = 0 " prevent remap from breaking supertab
+   let g:SuperTabLongestHighlight = 1
+   set wildmode=list:longest,full
+   "let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+   "let g:SuperTabCompletionContexts = \ ['ClojureContext'] + g:SuperTabCompletionContexts
+   let g:SuperTabDefaultCompletionType = "context"
+
+   let g:SuperTabSetDefaultCompletionType="<c-x><c-u>"
+
+"EasyMotion
+   "disabled default mappings
+   let g:EasyMotion_do_mapping = 0 
+   " Turn on case sensitive feature
+   let g:EasyMotion_smartcase = 1
+   
+   "Bi-directional find motion Jump to anywhere you want with minimal keystrokes, with just one key binding.  `s{char}{char}{label}`
+   
+   "map \ <Plug>(easymotion-prefix)
+   map s <Plug>(easymotion-s2)
+
+   " replace vim search
+   map  / <Plug>(easymotion-sn)
+
+   "next prev
+   map  n <Plug>(easymotion-next)
+   map  N <Plug>(easymotion-prev)
+
+   "JK motions: Line motions
+   map <Leader>j <Plug>(easymotion-j)
+   map <Leader>k <Plug>(easymotion-k)
+
+set nofoldenable    " disable folding
+set maxmempattern=5000

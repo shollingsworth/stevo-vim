@@ -1,0 +1,481 @@
+snippet hd "here doc" b
+${1:var} = """$0
+"""
+endsnippet
+
+snippet f "format string" i
+"{}".format($0)
+endsnippet
+
+snippet #! "shabang" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import __future__
+import sys
+import os
+import logging
+$0
+endsnippet
+
+snippet pp "pretty print" b
+import pprint
+out = pprint.pformat($0)
+print(out)
+endsnippet
+
+snippet [] "list comprension generic" b
+arr = [x for x in range(1,10)]
+endsnippet
+
+snippet [] "if" b
+arr = [x for x in arr if x == 'match']
+endsnippet
+
+
+snippet for "list iterator for w/ index" b
+for idx, val in enumerate(ints):
+	print(idx, val)
+endsnippet
+
+snippet for "list iterator value only" b
+for  val in arr:
+	print(val)
+endsnippet
+
+snippet for "dict iterator for" b
+for key, val in dict.items():
+	print(key, val)
+endsnippet
+
+
+snippet file "open file for reading" b
+fh = open(${1:filepath}$0, 'r')
+endsnippet
+
+snippet file "open file for writing" b
+fh = open(${1:filepath}$0, 'w')
+endsnippet
+
+snippet file "open file for iterable" b
+with open(${1:filepath}, 'r') as myfile:
+	data=myfile.read()
+endsnippet
+
+snippet file "touch file and immediately close" b
+fh = open(${1:filepath}$0, 'a').close()
+endsnippet
+
+snippet file "stdin" b
+from select import select
+select([sys.stdin], [], [], ${1:1})
+fh = sys.stdin
+endsnippet
+
+snippet rand "random init" b
+import random
+random.randrange(1,100)
+endsnippet
+
+snippet debug "print out info on a object" b
+from pprint import pprint                                                        
+from inspect import getmembers                                                   
+pprint(getmembers(${1:object_var}))  
+endsnippet
+
+snippet main "Goes at the bottom of a class for testing" b
+if __name__ == '__main__':
+endsnippet
+
+snippet env "Environment Variable" b
+#import os
+os.environ['${1:varname}']
+endsnippet
+
+snippet yaml "yaml dump" b
+import yaml
+res = yaml.safe_dump($0,default_flow_style=False)
+print(res)
+endsnippet
+
+snippet yaml "yaml to file" b
+import yaml
+res = yaml.safe_dump($0,default_flow_style=False)
+open('${1:filename}.yaml', 'w').write(res)
+endsnippet
+
+
+snippet json "json debugging tools dumps obj in json format" b
+print(json.dumps($0, indent=5))
+endsnippet
+
+snippet r "raise exception" b
+raise Exception("$0")
+endsnippet
+
+snippet csv "CSV from file" b
+import csv
+	with open('names.csv') as csvfile:
+	reader = csv.DictReader(csvfile)
+		for row in reader:
+			print(row['first_name'], row['last_name'])
+endsnippet
+
+snippet csv "CSV from string" b
+import csv
+reader = csv.reader(str.splitlines(),delimiter=",")
+	for row in reader:
+	print(row['first_name'], row['last_name'])
+endsnippet
+
+snippet try "vanilla try" b
+try:
+	$0
+except:
+endsnippet
+
+snippet try "try with print err" b
+import traceback
+try:
+	$0
+except:
+	print("Ooops!")
+	traceback.print_exc(file=sys.stdout)
+	sys.exit(-1)
+endsnippet
+
+snippet try "Try all the things" b
+try:
+	$0
+except KeyboardInterrupt:
+	print('SIGINT called... Bye!')
+	sys.exit(127)
+except:
+	import traceback
+	print("Ooops!")
+	traceback.print_exc(file=sys.stdout)
+finally:
+	sys.exit()
+endsnippet
+
+snippet com "Comment block" b
+"""
+${1:${VISUAL}}$0
+"""
+endsnippet
+
+snippet def "function def" b
+def ${1:fname}(${2:self,}$0):
+	"""
+	${3:docstring for $1}
+	"""
+endsnippet
+
+snippet __s "class def __str__" b
+def __str__(self):
+	return $0
+endsnippet
+
+snippet attr "check attributes" b
+req_attr = [
+	'subnetid',
+	'vpcid',
+	'instancetype',
+	'stack_template',
+	'sshacl',
+	'region',
+	'name',
+	'pub_ssh_key',
+]
+for attr in req_attr:
+	obj = getattr(self,attr)
+	if not obj:
+		raise Exception("Error, self.%s is not set" % attr)
+endsnippet
+
+snippet info "info method" b
+def info(object, spacing=10, collapse=1):
+    """Print methods and doc strings.
+    
+    Takes module, class, list, dictionary, or string."""
+    methodList = [method for method in dir(object) if callable(getattr(object, method))]
+    processFunc = collapse and (lambda s: " ".join(s.split())) or (lambda s: s)
+    print("\n".join(["%s %s" %
+                      (method.ljust(spacing),
+                       processFunc(str(getattr(object, method).__doc__)))
+                     for method in methodList]))
+endsnippet
+
+snippet dts  "datetime string" b
+import datetime
+dtstring = datetime.datetime.now().strftime("vpc-debug-%Y-%m-%d.%s.log")
+endsnippet
+
+snippet hint "typehint" b
+def feeder(get_next_item: Callable[[], str]) -> None:
+endsnippet
+
+#https://github.com/boto/boto/blob/develop/boto/ec2/__init__.py
+#https://ceronman.com/2013/03/12/a-powerful-unused-feature-of-python-function-annotations/
+snippet doc "docstring" b
+"""
+${1:${VISUAL}}
+@type arg: str
+@param arg: description
+@rtype: list
+"""
+endsnippet
+
+snippet dd "dict helper" b
+'${1:${VISUAL}}' : $0,
+endsnippet
+
+snippet iget "dict helper" b
+'${1:${VISUAL}}' : i.get('$1'),
+endsnippet
+
+snippet aws "boto3 instance thinger" b
+self.ec2 = boto3.client(
+	'ec2',
+	aws_access_key_id=self.access_key_id,
+	aws_secret_access_key=self.access_key_secret,
+	region_name=region,
+)
+endsnippet
+
+snippet aws "aws filter" b
+conn_filter = [
+	{ 'Name':'state', 'Values':[ 'available', 'pending'] },
+]
+endsnippet
+
+snippet ty "type hint" 
+# type: ${1:str}
+endsnippet
+
+snippet args "args subcommand" b
+# =========================================
+# args
+# =========================================
+import argparse
+def __create(args):
+    ""
+program_desc = "$0"
+#default args
+parent_parser = libAwsArgParse.getStandardParent()
+parent_parser.add_argument("-o", "--option", help="help here", required=True)
+parser = argparse.ArgumentParser(
+    description=program_desc,
+    add_help=True,
+)
+subparsers = parser.add_subparsers(
+    title='subcommands',
+    help='subcommand help',
+)
+p_create = subparsers.add_parser('create',parents=[parent_parser],help="subcmd help goes here")
+p_create.set_defaults(func=__create)
+"""
+=====================================
+TESTS
+=====================================
+acct = libChoices.test_account_default
+reg = libChoices.test_region_default
+args_var = "create -a {} -r {}".format(acct,reg).split()
+args = parser.parse_args(args_var)
+"""
+args = parser.parse_args()
+args.func(args)
+endsnippet
+
+
+snippet args "argparse general" b
+# =========================================
+# args
+# =========================================
+import argparse
+program_desc = "$0"
+parser = argparse.ArgumentParser(description=program_desc, add_help=True)
+parser.add_argument("-a", "--account", help="aws account", required=True)
+parser.add_argument("-l", "--log_level", help="log level", choices=['error','info','debug'], default='error')
+parser.add_argument("-D", "--debug", help="turn on debuggings", action='store_true', default=False)
+args = parser.parse_args()
+endsnippet
+
+snippet exit "exit statement" b
+sys.exit(-1)
+endsnippet
+
+snippet path "add custom path" b
+#absolute current path
+os.path.dirname(os.path.abspath(__file__))
+#execute system path previous
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+endsnippet
+
+snippet key "get key value from array of dicts" b
+val = [d['Value'] for d in vpn['Tags'] if d['Key'] == 'Name'].pop(0)
+endsnippet
+
+snippet input "input" b
+v = raw_input("Press ENTER to continue")
+print(v)
+endsnippet
+
+snippet edit "edit file" b
+def _getEditText(self,initial_text):
+	tf = tempfile.NamedTemporaryFile(suffix=".tmp")
+	tf.write(initial_text)
+	tf.flush()
+	call([self.editor, tf.name])
+	tf.flush()
+	tf.seek(0)
+	retval = tf.read()
+	tf.close()
+	return retval
+endsnippet
+
+snippet map "map lambda" b
+map(lambda x:x.lower(),["A","B","C"])
+endsnippet
+
+
+snippet li "logging info" b
+logging.info("$0")
+endsnippet
+
+snippet lw "logging warn" b
+logging.warn("$0")
+endsnippet
+
+snippet le "logging error" b
+logging.error("$0")
+endsnippet
+
+snippet lex "logging exception" b
+logging.exception("$0")
+endsnippet
+
+snippet lex "loggin exception passthrough" b
+logging.error(e, exc_info=True)
+endsnippet
+
+snippet ld "logging debug" b
+logging.debug("$0")
+endsnippet
+
+snippet log "setup logging config" b
+self.log = logging.getLogging(__name__)
+if debug:
+	logging.basicConfig(level=logging.DEBUG)
+elif quiet:
+	logging.basicConfig(level=logging.ERROR)
+else:
+	logging.basicConfig(level=logging.INFO)
+endsnippet
+
+snippet cl "class" b
+class ${1:${VISUAL}}(object):
+    def __init__(
+		self,
+	):
+endsnippet
+
+snippet arg "str" b
+parser.add_argument('-s','--str', type=str, required=False, default=None)
+endsnippet
+
+snippet arg "int" b
+parser.add_argument('integer', type=int)
+endsnippet
+
+snippet arg "choices" b
+parser.add_argument('foo', type=int, choices=range(5, 10))
+endsnippet
+
+snippet arg "func" b
+parser.add_argument('func', type=__function_name)
+endsnippet
+
+snippet arg "file" b
+parser.add_argument('filename', type=argparse.FileType('w'))
+endsnippet
+
+snippet arg "append" b
+parser.add_argument('--append', action='append', help='help', required=False)
+endsnippet
+
+snippet arg "true" b
+parser.add_argument('--store_true', action='store_true', help='help', required=False)
+endsnippet
+
+snippet arg "false" b
+parser.add_argument('--store_false', action='store_false', help='help', required=False)
+endsnippet
+
+snippet arg "count" b
+parser.add_argument('--verbose', '-v', action='count')
+endsnippet
+
+snippet arg "nargs" b
+parser.add_argument('--foo', nargs='*') #0 or more
+parser.add_argument('--foo', nargs='+') #1 or more
+parser.add_argument('--foo', nargs='2') #exactly 2
+endsnippet
+
+snippet bcom "big comment" b
+"""===================================================
+${1:${VISUAL}}$0
+==================================================="""
+endsnippet
+
+snippet ife "if/else shorthand" b
+${1:var} = $1.pop(0) if $1 else None
+endsnippet
+
+snippet table "table rows" b
+import prettytable 
+if not retarr:
+	print("Nothing to list")
+	return
+t = prettytable.PrettyTable()
+t.field_names = retarr[0].keys()
+t.border = True
+for i in retarr:
+	t.add_row(i.values())
+print(t)
+endsnippet
+
+snippet table "table sections" b
+import prettytable 
+t = prettytable.PrettyTable()
+t.field_names = ['key','value']
+t.max_width = 50
+t.border = True
+for k,v in os.environ.items():
+    t.add_row([k,v])
+print(t)
+endsnippet
+
+snippet so "stdout" b
+sys.stdout.write($0)
+endsnippet
+
+snippet se "stderr" b
+sys.stderr.write($0)
+endsnippet
+
+snippet cmd "call command" b
+from subprocess import Popen, PIPE, call
+p = Popen(['yubioath'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+#output, err = p.communicate(b"input data that is passed to subprocess' stdin")
+output, err = p.communicate()
+rc = p.returncode
+print(output)
+print(rc)
+endsnippet
+
+snippet dur "seconds duration" b
+start = time.time()
+end = time.time()
+seconds = end - start
+endsnippet

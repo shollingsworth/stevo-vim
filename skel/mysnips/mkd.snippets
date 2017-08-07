@@ -1,0 +1,96 @@
+snippet strike "Strikethrough Wrapper" b
+~~${VISUAL}$0~~
+endsnippet
+
+snippet help "inspiration" b
+Step 1: Understand your audience. ...
+Step 2: Start with a topic and working title. ...
+Step 3: Write an intro (and make it captivating). ...
+Step 4: Organize your content. ...
+Step 5: Write! ...
+endsnippet
+
+snippet h1 "h1" b
+${1:text here}
+========================
+endsnippet
+
+snippet h2 "h2" b
+${1:text here}
+------------------------
+endsnippet
+
+snippet h3 "h3" b
+### ${1:text here}
+endsnippet
+
+snippet h4 "h4" b
+#### ${1:text here}
+endsnippet
+
+snippet h5 "h5" b
+##### ${1:text here}
+endsnippet
+
+snippet list "example" b
+1. item 1
+2. item 2
+  * unordered
+3. item 3
+  1. ordered sub-item 1
+
+* unordered
+  * 2
+    * 3
+endsnippet
+
+snippet link "html link" b
+[${1: desc}](${2:url})
+endsnippet
+
+snippet img "image link" b
+![${1: alt text}](${2:url} "${3:title_text}")
+endsnippet
+
+snippet code "code block" b
+\`\`\`${1:bash}
+${VISUAL}$0
+\`\`\`
+endsnippet
+
+snippet cl "code inline" b
+\`${1:${VISUAL}}$0\`
+endsnippet
+
+
+
+snippet table "table layout" b
+${1:| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | \$1600 |
+| col 2 is      | centered      |   \$12 |
+| zebra stripes | are neat      |    \$1 |
+}
+| | | |
+| --- | --- | --- | --- |
+| | | |
+endsnippet
+
+snippet blockq "block quote" b
+> $0
+>
+endsnippet
+
+snippet youtube "Youtube video link" b
+[![${2:alt text}](http://img.youtube.com/vi/${1:youtube_video_id}/0.jpg)](http://www.youtube.com/watch?v=$1)
+endsnippet
+
+snippet anci "anchor inline" i
+[${1:${VISUAL}}](#`!p snip.rv = t[1].replace(' ','_').lower()`)
+`!p snip.rv = "<a name='" + t[1].replace(' ','_').lower()+ "'></a>"`
+endsnippet
+
+snippet anc "anchor" i
+[${1:${VISUAL}}](#`!p snip.rv = t[1].replace(' ','_').lower()`)
+`!p snip.rv = "<a name='" + t[1].replace(' ','_').lower()+ "'></a>"`
+endsnippet

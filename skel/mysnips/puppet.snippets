@@ -1,0 +1,117 @@
+snippet not "Notify" b
+notify { 'title':
+	withpath => true,
+	name     => "message",
+}
+endsnippet
+
+snippet def "Define function" b
+define make_fcontext(
+	$path = undef,
+	$context = undef,
+) {
+	selinux::fcontext{ "$title":
+		require => File["${path}"],
+		pathname => "${path}",
+		context => $context,
+		notify => Exec["$title"],
+	}->
+	exec { "$title":
+		require => selinux::fcontext["$title"],
+		command => "/usr/sbin/restorecon -Rv ${path}",
+		refreshonly => true,
+	}
+}
+endsnippet
+
+snippet package "package if ..." b
+	if ! defined(Package['${1:package_name}']) {
+	package { '$1':
+		ensure => installed,
+	}
+}
+endsnippet
+
+snippet file "file block" b
+file { '${1:${VISUAL}}':
+	ensure  => file,
+	owner   => 'root',
+	group   => 'root',
+	mode    => '0644',
+	content => template('profiles/nrpe.erb'),
+	require => Package['nrpe'],
+}
+endsnippet
+
+snippet package "package" b
+package { '${1:${VISUAL}}':
+	ensure   => present,
+	provider => $::facts['os']['family'] ? {
+		'RedHat' => 'yum',
+		default  => fail('Provider not specified for rng-tools for puppet gpg key creation.'),
+	}
+}
+endsnippet
+
+snippet inc "include class" b
+class { '::puppetdb::master::config':
+    puppetdb_server => $database_host
+}
+endsnippet
+
+snippet ini "ini settings" b
+ini_setting { 'rngd ExecStart': 
+    ensure  => present, 
+    path    => '/usr/lib/systemd/system/rngd.service', 
+    section => 'Service', 
+    setting => 'ExecStart', 
+    value   => '/sbin/rngd -f -r /dev/urandom -o /dev/random', 
+    require => Ini_setting['rngd Description'], 
+}
+endsnippet
+
+snippet service "service" b
+service { 'rngd':
+    ensure  => running,
+    before  => Class['hiera'],
+    require => Ini_setting['rngd WantedBy'],
+}
+endsnippet
+
+snippet exec "Description" b
+exec { 'exec 1':
+    command => 'cmd1',
+    path    => '/bin:/usr/bin:/usr/local/bin',
+    creates => '/some/file',
+    require => File['/needs/to/be/here'],
+} ~>
+exec { 'exec 2':
+  command     => 'cmd2',
+  path        => '/bin:/usr/bin:/usr/local/bin',
+  refreshonly => true,
+  timeout     => '0',
+} ->
+exec { 'exec 3':
+  command     => 'cmd3',
+  path        => '/bin:/usr/bin:/usr/local/bin',
+  refreshonly => true,
+}
+endsnippet
+
+snippet cron "Description" b
+cron { 'cron_cmd stuff':
+    command =>
+        '/usr/bin/cron_cmd 2>&1',
+    user    => 'root',
+    minute  => '*',
+    require => Exec['cron_cmd'],
+}
+endsnippet
+
+snippet line "file line" b
+file_line { '?':
+	path => '',  
+	line => 'line goes here',
+	match   => "^line.*$",
+}
+endsnippet

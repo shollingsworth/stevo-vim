@@ -1,0 +1,69 @@
+priority -10
+
+snippet com "comment" b
+<!-- $0 -->
+endsnippet
+
+snippet bcom "big comment" b
+<!--
+***********************************************
+***********************************************
+* $0
+***********************************************
+***********************************************
+-->
+endsnippet
+
+snippet html "html template" b
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>${1:title}</title>
+	<!--
+	<link rel="stylesheet" type="text/css" href="css_file" />
+	<script src="script_file"></script>
+	-->
+</head>
+<body>
+</body>
+</html>
+endsnippet
+
+
+snippet js "js include file" b
+<script type="text/javascript" src="${1:include_name}"></script>
+endsnippet
+
+snippet js "js inline" b
+<script type="text/javascript">
+   $0
+</script>
+endsnippet
+
+snippet css "css file include" b
+<link type="text/css" rel="stylesheet" media="all" href="${1:filepath}"/>
+endsnippet
+
+snippet css "css inline" b
+<style type="text/css">
+   $0
+</style>
+endsnippet
+
+snippet table "table quick create" b
+<table>
+	<tr>
+		<th> </th>
+	</tr>
+	<tr>
+		<td> </td>
+	</tr>
+</table>
+endsnippet
+
+snippet %% "django template block" i
+{%$0%}
+endsnippet

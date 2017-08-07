@@ -1,0 +1,193 @@
+snippet cb "code block snip" b
+{code:title=${1:title}|theme=FadeToGrey|linenumbers=false|language=${2:bash}|collapse=false}
+${1:${VISUAL}} $0
+{code}
+endsnippet
+
+snippet ci "inline code block" i
+_{color:${2:red}} {{${1:${VISUAL}}}} {color}_
+endsnippet
+
+snippet an "simple anchor" i
+{anchor:${1:${VISUAL}}}
+endsnippet
+
+snippet anc "anchor" i
+[${1:${VISUAL}} | #`!p snip.rv = t[1].replace(' ','-').lower()`] 
+$1 {anchor:`!p snip.rv = t[1].replace(' ','-').lower()`} \[[top|#top]\]
+endsnippet
+
+snippet color "colorize me" i
+{color:${2:red}}${1:${VISUAL}}{color}
+endsnippet
+
+snippet table "table standard" b
+||heading 1||heading 2||heading 3||
+|cell A1|cell A2|cell A3|
+|cell B1|cell B2|cell B3|
+endsnippet
+
+snippet table "table vert" b
+||heading 1|col A1|col A2|col A3|
+||heading 2|col B1|col B2|col B3|
+endsnippet
+
+snippet table "table custom" b
+{section:border=true}
+{column:width=30%}
+Text for this column goes here. This is  the smaller column with a width of only 30%.
+{column}
+{column:width=70%}
+Text for this column goes here. This is  the larger column with a width of 70%.
+{column}
+{section}
+endsnippet
+
+snippet table "table lists" b
+||Heading 1||Heading 2||
+|* Item 1
+* Item 2
+* Item 3|# Item 1
+# Item 2
+# Item 3|
+endsnippet
+
+snippet und "underscore" i
++${1:${VISUAL:underscore}}+
+endsnippet
+
+snippet todo "todo list" i
+[] ${1:${VISUAL}}
+endsnippet
+
+snippet bo "bold" i
+*${1:${VISUAL:underscore}}*
+endsnippet
+
+snippet it "italic" i
+_${1:${VISUAL:underscore}}_
+endsnippet
+
+snippet cite "format citation" i
+??${1:${VISUAL:citation}}??
+endsnippet
+
+snippet sup "format superscript" i
+^${1:${VISUAL:superscript}}^
+endsnippet
+
+snippet sub "format subscript" i
+~${1:${VISUAL:superscript}}~
+endsnippet
+
+snippet del "deleted" i
+-${1:${VISUAL}}-
+endsnippet
+
+
+snippet mono "format mono" i
+{{${1:${VISUAL:monospaced}}}}
+endsnippet
+
+snippet bq "format blockquote" i
+{quote}
+${1:${VISUAL:block quote string}}
+{quote}
+endsnippet
+
+snippet list "list mixed" i
+# Here
+#* is
+#* an
+# example
+#* of
+#* a
+# mixed
+# list
+endsnippet
+
+snippet list "list sub-ordered" b
+# Here's a sentence.
+## This is a sub-list point.
+### Third list level.
+### Another point at the third level.
+## And a second sub-list point.
+# Here's another sentence.
+endsnippet
+
+snippet list "list bullet" i
+* some
+* bullet
+** indented
+** bullets
+* points
+endsnippet
+
+snippet hr "horizonal rule" b
+----
+$0
+endsnippet
+
+snippet pan "create a panel" b
+{panel:title=${1:title}|borderStyle=dashed|borderColor=black|titleBGColor=#f2f2f2|bgColor=white}
+${2:${VISUAL}}$0
+{panel}
+endsnippet
+
+snippet nof "no format" i
+{noformat}
+${1:${VISUAL}}
+{noformat}
+endsnippet
+
+snippet draw "DrawIO" b
+{drawio:fitWindow=true|autoSize=false|border=true|height=800|width=800|diagramName=${1:name.xml}}
+endsnippet
+
+snippet img "image tag" b
+!${1:${VISUAL}}|align=${2:center}!
+endsnippet
+
+snippet imgh "image help" b
+What you need to type
+	!http://www.host.com/image.gif!
+		 An image from a remote source is displayed on the page. Uses a fully qualified URL.
+
+	!attached-image.gif!
+		An image file attached to the page is displayed.
+
+	!pageTitle^image.gif!
+		An image file attached to a different page is displayed.
+
+	!spaceKey:pageTitle^image.gif!
+		An image file attached to a page in a different space is displayed.
+
+	!/2010/05/23/My Blog Post^image.gif!
+		An image file attached to a blog post is displayed.
+
+	!image.jpg|thumbnail!
+		The image is displayed as a thumbnail on the page (only works with images that are attached to the page). Users can click on the thumbnail to see the full-sized image. Thumbnails must be enabled by the site administrator for this to work.
+
+	!image.gif|align=right, vspace=4!
+		For any image, you can specify attributes of the HTML image tag as a comma separated list of name=value pairs.
+
+Available HTML image tags include:
+	align 
+		Available values are 'left', 'right', 'bottom', 'center', 'top'.
+	border 
+		Specifies the width of the border (in pixels).
+	bordercolor 
+		Use with the 'border' tag. Specify colors by name or hex value.
+	hspace
+		Specifies the amount of whitespace to be inserted to the left and right of the image (in pixels).
+	vspace
+		Specifies the amount of whitespace to be inserted above and below the image (in pixels).
+	width
+		Specifies the width of the image (in pixels). This will override the natural width of the image.
+	height
+		Specifies the height of the image (in pixels). This will override the natural height of the image.
+	title
+		Specifies alternate text for the image, which is displayed when the pointer hovers over the image.
+	alt
+		Specifies alternate text for the image. This text is retrievable via search, and contributes to accessibility of the page for text-only viewing.
+endsnippet

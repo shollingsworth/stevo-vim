@@ -1,0 +1,29 @@
+snippet com "comment" b
+/*
+$0
+*/
+endsnippet
+
+snippet bcom "big comment description" b
+/*****************************************************
+** $0
+******************************************************/
+endsnippet
+
+snippet temp "Create temporary table" b
+CREATE TEMPORARY TABLE IF NOT EXISTS ${1:table} AS (
+	$0
+);
+endsnippet
+
+snippet tally "Create tempoary tally table" b
+set @n = 0;
+set @max_num = ${1:1000};
+create temporary table tally
+select @n := @n + 1 as n
+from information_schema.columns T1
+cross join information_schema.columns T2
+cross join information_schema.columns T3
+where @n < @max_num;
+$0
+endsnippet

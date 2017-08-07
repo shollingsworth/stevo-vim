@@ -1,0 +1,137 @@
+priority 10
+
+#`!p snip.rv = '#!/usr/bin/env bash\n\n'`
+snippet #!
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+$0
+endsnippet
+
+snippet pad "printf pad number" b
+printf "%02d\n" ${num}
+endsnippet
+
+snippet join "join function" b
+join_by() {
+	#join_by "," ("1","2","3")
+    local IFS="$1"; shift; echo "$*";
+}
+endsnippet
+
+snippet stat "stat file time" b
+if [ -f ${1:${VISUAL}} ]; then
+	now=$(date +%s)
+	fe=$(stat --printf="%Y" ${1:${VISUAL}})
+	diff=$((${now} - ${fe}))
+	echo "${diff}"
+fi
+endsnippet
+
+
+snippet if "my if statement" b
+if [[ $0 ]]; then
+fi
+endsnippet
+
+snippet select "select statment" b
+select opt in "${${1:array}[@]}"
+do
+echo Do something with ${opt}
+done
+endsnippet
+
+snippet opts "my getopts" b
+while getopts ":a:" opt; do
+  case $opt in
+    a)
+      echo "-a was triggered! with ${OPTARG}" >&2
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+	*)
+      ;;
+  esac
+done
+endsnippet
+
+snippet trap "trap call" b
+trap "${1:cmd}" EXIT
+endsnippet
+
+snippet rand "random password" b
+cat /dev/urandom | tr -dc 'a-zA-Z0-9!-+' | fold -w 50 | head -n 1
+endsnippet
+
+snippet runfile "runfile place" b
+runfile=~/.check_update_run
+if [ -f ${runfile} ]; then
+    echo "$0 ${runfile} exists"
+    now=$(date +%s)
+    fe=$(stat --printf="%Y" ${runfile})
+    diff=$((${now} - ${fe}))
+    if [ ${diff} -gt 600 ]; then 
+        echo "removing runfile and exiting..." 
+        rm -f ${runfile}
+    fi
+    exit
+else
+    >${runfile}
+fi
+endsnippet
+
+snippet yn "yesno" b
+yesno() {
+    msg="${1?"yea... this function needs an argument"}"
+    echo -ne "${msg}: (y/n): "
+    read yn
+    yn=$(echo "${yn}" | tr 'A-Z' 'a-z')
+    case "${yn}" in
+        "y")
+            return 0
+            ;;
+        "n")
+            return 1
+            ;;
+        *)
+            yesno "${msg}"
+            ;;
+    esac
+}
+
+if yesno "Do you want to play a game?"; then
+    echo "you said yes"
+else
+    echo "you said no"
+fi
+endsnippet
+
+snippet q "quote" 
+"${1:${VISUAL}}"
+endsnippet
+
+snippet hd "here doc" b
+var=$(cat <<EOF
+${1:${VISUAL}
+$0
+EOF
+)
+endsnippet
+
+snippet arg "arg set" b
+${1:var}="\${${2:1}?"argv[$2]: ${3:argument desc here}"}"
+endsnippet
+
+snippet lcom "little com" 
+#------------------
+# $0
+#------------------
+endsnippet
+
+snippet rme "remove me comments" b
+#------- @TODO REMOVE-ME START - ${1:Description}
+$0
+#------- REMOVE-ME END
+endsnippet

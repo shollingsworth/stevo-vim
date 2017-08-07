@@ -1,0 +1,1184 @@
+extends html,javascript
+priority 10
+
+snippet js "js include file" b
+<script type="text/javascript" src="${1:include_name}"></script>
+endsnippet
+
+snippet js "js inline" b
+<script type="text/javascript">
+$(document).ready(function() { //Autoload
+	$0
+});
+</script>
+endsnippet
+
+snippet js "js checkbox to array" b
+var checks = $('input:checkbox:checked.classname').map(function(){
+	return this.value;
+}).get();
+endsnippet
+
+snippet js "js input value" b
+var val = $('input[name="valuename"]').val();
+endsnippet
+
+snippet css "css file include" b
+<link type="text/css" rel="stylesheet" media="all" href="${1:filepath}"/>
+endsnippet
+
+snippet css "css inline" b
+<style type="text/css">
+	$0
+</style>
+endsnippet
+
+snippet me "private method" b
+/**
+ * ${1:name} : ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ ${5:* @param ${6:type} $3 ${7:description}}
+ ${8:* @return ${9:type} $4 ${10:desc}}
+ */
+private function $1(${3:$${4:arg}}) {
+   $0
+}
+endsnippet
+
+snippet me "protected method" b
+/**
+ * ${1:name} : ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ ${5:* @param ${6:type} $3 ${7:description}}
+ ${8:* @return ${9:type} $4 ${10:desc}}
+ */
+protected function $1(${3:$${4:arg}}) {
+   $0
+}
+endsnippet
+
+snippet me "public method" b
+/**
+ * ${1:name} : ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ ${5:* @param ${6:type} $3 ${7:description}}
+ ${8:* @return ${9:type} $4 ${10:desc}}
+ */
+public function $1(${3:$${4:arg}}) {
+   $0
+}
+endsnippet
+
+snippet me "static private method" b
+/**
+ * ${1:name} : ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ ${5:* @param ${6:type} $3 ${7:description}}
+ ${8:* @return ${9:type} $4 ${10:desc}}
+ */
+static private function $1(${3:$${4:arg}}) {
+   $0
+}
+endsnippet
+
+snippet me "static protected method" b
+/**
+ * ${1:name} : ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ ${5:* @param ${6:type} $3 ${7:description}}
+ ${8:* @return ${9:type} $4 ${10:desc}}
+ */
+static protected function $1(${3:$${4:arg}}) {
+   $0
+}
+endsnippet
+
+snippet me "static public method" b
+/**
+ * ${1:name} : ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ ${5:* @param ${6:type} $3 ${7:description}}
+ ${8:* @return ${9:type} $4 ${10:desc}}
+ */
+static public function $1(${3:$${4:arg}}) {
+   $0
+}
+endsnippet
+
+snippet __c "constructor" b
+/**
+ * Consructor
+ */
+public function __construct() {
+}
+endsnippet
+
+snippet con "Constant" 
+/**
+ * @const ${1:varname} ${2:description}
+ */
+const $1 = ${3:value};
+endsnippet
+
+snippet hcom "htmlcomment" 
+<!--- $0-->
+endsnippet
+
+snippet hcomb "BIG htmlcomment" b
+<!--- =======================================================
+=============================================================
+$0
+=============================================================
+============================================================= -->
+endsnippet
+
+snippet ?r "reverse php tag" b
+?>
+${1:<!-- html here -->}
+<?php
+endsnippet
+
+snippet ifs "if shorthand" b
+${1:action/var} (${2:logic}) ? "${3:true_val}" : "${4:false_val}";
+endsnippet
+
+snippet ?if "html if Simple" b
+<?php if($0) { //BEGIN IF ?>
+<!-- html here -->
+<?php } //END IF ?>
+endsnippet
+
+snippet ?if "html if BIG BLOCK" b
+<?php if(false) { // *** BEGIN ${1:description} ?>
+<!-- html here -->$0
+<?php } elseif(false) { // ELSEIF $1 ?>
+<?php } else { // ELSE $1 ?>
+<?php } // END *** $1 ?>
+endsnippet
+
+
+snippet com "Comment" b
+/*
+${VISUAL} $0
+*/
+endsnippet
+
+snippet comb "BIG Comment" b
+//================================================================================
+//$0
+//================================================================================
+endsnippet
+
+snippet ? "php open close" i
+<?php $0?>
+endsnippet
+
+snippet table "table builder" b
+<table class="sortable csv_download table table-stripped table-bordered table-hover">
+<caption></caption>
+<thead>
+<tr>
+	<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td></td>
+</tr>
+</tbody>
+</table>
+endsnippet
+
+snippet ?e "echo instance" i
+<?php echo $$0; ?>
+endsnippet
+
+
+snippet a "a href" b
+<a href='${1:url}' ${2:class='${3:classname}'}>${4:Anchor Name}</a>
+endsnippet
+
+snippet doif "do if block" 
+do if ($0) {
+} while (false);
+endsnippet
+
+snippet comsect "Add main section header comment" 
+/* ===================================================================================================
+======================================================================================================
+${1:Section Name}
+======================================================================================================
+=================================================================================================== */
+$0
+endsnippet
+
+snippet file "File name" i
+`!p snip.rv = snip.fn`
+endsnippet
+
+snippet newf "Make new generic File" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Include File Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/** Begin Program */
+?>
+endsnippet
+
+snippet newf "Make new abstract class file" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Abstract Class Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/**
+ * $1 : $2
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+${3:abstract class} $1 {
+	abstract protected function ${4:function_name} (${5:$arg});
+} 
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet newf "Make new Interface File" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Interface Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/**
+ * $1 : $2
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+${3:interface} $1 {
+} 
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet newf "Make new Class File (singleton)" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Class Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/**
+ * $1 : $2
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+class $1 ${4:extends ${5:ParentClass}} $0{
+	/** Instance variable defaults to null, when null a new one will be created */
+	protected static $instance = null;
+
+	/**
+	 * Get Instance of self, if exists, otherwise create one
+	 * @version `date "+%Y-%m-%d %H:%M"`
+	 * @return $1
+	 */
+	public static function getInstance() {
+		if (is_null(self::$instance)) { self::$instance = new self; }
+		return self::$instance;
+	}
+
+	/**
+	 * Consructor
+	 */
+	protected function __construct() {
+		$0
+	}
+} 
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet newf "Make new Class File" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Class Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/**
+ * $1 : $2
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+${3:class} $1 ${4:extends ${5:ParentClass}} $0{
+   /**
+    * Consructor
+    */
+	public function __construct() {
+		$0
+	}
+} 
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet newf "Make new static lib class" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Class Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/**
+ * $1 : $2
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+${3:class} $1 {
+} 
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet newf "Make new Module" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Class Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/**
+ * $1 : $2
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+class $1 {
+   /**
+	 * Default Action if only module given with no action
+	 */
+   public function defaultaction() {
+		$0
+	}
+} 
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet f "form group email" b
+<div class="form-group">
+	<label for="${1:id}">Email address</label>
+	<input type="email" class="form-control" id="$1" placeholder="Enter email">
+</div>
+endsnippet
+
+snippet f "checkbox stacked" b
+<div class="checkbox">
+	<label>
+		<input type="checkbox" name="${1:name}" value="${2:checkbox_value}" ${3:checked}>
+		${4:check box description}
+		<input type="checkbox" name="$1" value="${5:checkbox_value}">
+		${6:check box description}
+	</label>
+</div>
+endsnippet
+
+snippet f "checkbox inline" b
+<label class="checkbox-inline">
+	<input type="checkbox" name="${1:name}" value="${2:checkbox_value}" ${3:checked}> ${4:check box description}
+	<input type="checkbox" name="$1" value="${5:checkbox_value}"> ${6:check box description}
+</label>
+endsnippet
+
+snippet f "text input group" b
+<div class="form-group">
+	<label for="${1:input_id}">${2:Description}</label>
+	<input type="text" class="form-control" id="$1" placeholder="${3:Placeholder}">
+</div>
+endsnippet
+
+snippet f "select" b
+<select name="${1:element_name}" class="form-control">
+	<option value="${2:value}">${3:value_description}</option>
+</select>
+endsnippet
+
+snippet img "img embed" b
+<img src="/images/${1:image_file.gif}" alt="${2:Alt Description"}${3: height="42" width="42"}>
+endsnippet
+
+snippet f "radio inline" b
+<label class="radio-inline">
+	<input type="radio" name="${1:option_name}" value="${2:option_value}" checked>${3:option_description}
+	<input type="radio" name="$1" value="${4:option_value}">${5:option_description}
+</label>
+endsnippet
+
+snippet f "hidden form element" b
+<input type="hidden" name="${1:option_name}" value="${2:option_value}">
+endsnippet
+
+snippet f "radio stacked" b
+<div class="radio">
+	<label>
+		<input type="radio" name="${1:option_name}" value="${2:option_value}" checked>
+		${3:option_description}
+	</label>
+	<label>
+		<input type="radio" name="$1" value="${4:option_value}">${5:option_description}
+	</label>
+</div>
+endsnippet
+
+snippet f "bootstrap-datetimepicker" b
+<div class="form-group">
+   <div class='input-group date' id='${1:form_id}'>
+      <input name="${2:input_name}" type='text' class="form-control" />
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+   </div>
+</div>
+<script type="text/javascript">
+   $(function () { 
+      $('#$1').datetimepicker();
+   });
+</script>
+endsnippet
+
+snippet f "submit getlink button" b
+<div class="form-group">
+	<button type="button" class="getlink btn btn-default">${1:Action}</button>
+</div>
+endsnippet
+
+snippet f "form group email" b
+<div class="form-group">
+	<label for="${1:id}">Email address</label>
+	<input type="email" class="form-control" id="$1" placeholder="Enter email">
+</div>
+endsnippet
+
+snippet form "Form normal " b
+<form>
+</form>
+endsnippet
+
+snippet form "Form inline" b
+<form class="form-inline">
+</form>
+endsnippet
+
+snippet cv "class var" b
+/** ${1:variable}
+ * @var ${2:type/string/int/arry/etc} ${3:description}
+ */
+${4:protected} $$1 $0;
+endsnippet
+
+snippet do "do"
+do {
+	${2:// code... }
+} while (${1:/* condition */});
+endsnippet
+
+snippet else "else"
+else {
+	${1:// code...}
+}
+endsnippet
+
+snippet for "for"
+for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
+	${4:// code...}
+}
+endsnippet
+
+snippet fore "foreachk"
+foreach ($$0 as $idx => $val){
+}
+endsnippet
+
+snippet if "if"
+if (${1:/* condition */}) {
+	${2:// code...}
+}
+endsnippet
+
+snippet log "log"
+error_log(var_export(${1}, true));${2}
+endsnippet
+
+snippet session "session"
+$_SESSION['${1}']${2}
+endsnippet
+
+snippet t "t"
+$${1:retVal} = (${2:condition}) ? ${3:a} : ${4:b};${5}
+endsnippet
+
+snippet vgs "Get Set Var" b
+/** ${1:variable name}
+ * @var ${2:type/string/int/arry/etc} ${3:description}
+ */
+${4:protected} $$1 $0;
+/**  Getter for $1 */
+public function get${1/\w+\s*/\u$0/}() {
+	return $this->$1;
+} 
+/** Setter for $1 */
+public function set${1/\w+\s*/\u$0/}($$1) {
+	$this->$1 = $$1;
+	${6:return $this;}
+}
+endsnippet
+
+snippet get "Getter for VAR" 
+/**  Getter for $1 */
+public function get${1/\w+\s*/\u$0/}() { return $this->$1; } 
+
+endsnippet
+
+snippet gs "PHP Class Getter Setter" b
+/**  Getter for $1 */
+public function get${1/\w+\s*/\u$0/}() { return $this->$1; } 
+/** Setter for $1 */
+public function set${1/\w+\s*/\u$0/}($$1) { $this->$1 = $$1; ${4:return $this;} }
+$0
+endsnippet
+
+
+snippet pro "Protected function" b
+protected function ${1:name}(${2:$param})
+{
+	${VISUAL}${3:return null;}
+}
+$0
+endsnippet
+
+snippet fu "Function snip" b
+function ${1:name}(${2:$param}) {
+	${VISUAL}${3:return null;}
+}
+$0
+endsnippet
+
+snippet ifem "if empty" b
+if(empty($${1:variable})) $$1 = "${2:default_value}";
+endsnippet
+
+snippet ife "if else"
+if (${1:/* condition */}) {
+	${2:// code...}
+} else {
+	${3:// code...}
+}
+$0
+endsnippet
+
+snippet module  "new module file" b
+<?php
+/**
+ * ${1:`!p snip.rv = snip.fn.replace('.php','')`} : ${2:Application File Description}
+ * @version 2014-08-01 10:28
+ */
+
+/** Set Constants and default path for all includes */
+if(!@include_once($_SERVER['PHP_AUTO_INCLUDE'])) { print "Could not Load standard include file. Bailing...\n<br>"; exit(99); }
+
+/**
+ * $1: $2
+ * @package Module
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+class $1 extends moduleAbstract {
+  /**
+   * Default Action to show
+   * @version `date "+%Y-%m-%d %H:%M"`
+   */
+   public function defaultaction() {
+   }
+}
+// Note that it is a good practice to NOT end your PHP files with a closing PHP tag. 
+// This prevents trailing newlines on the file from being included in your output, 
+// which can cause problems with redirecting users.
+endsnippet
+
+snippet switch "switch regex" b
+switch ($key) {
+	case (preg_match("/auto/i",$key) ? true : false):
+		$class = 'hoa-auto';
+		break;
+}
+endsnippet
+
+snippet badge "bootstrap badge" b
+<span class='badge badge-default'>$0</span>
+endsnippet
+
+snippet switch "switch statement" b
+switch ($0) {
+	case '${1:value}':
+		break;
+	default:
+		break;
+}
+endsnippet
+
+snippet throw "Throw Exception" i
+throw new Exception("${1:Text to send}$0");
+endsnippet
+
+snippet hd "here Doc" b
+$${1:var} = <<<___DOC
+___DOC;
+endsnippet
+
+snippet while "while loop" b
+while (${1:condition}) {
+${2:/** code to be executed; */}
+}
+endsnippet
+
+
+snippet bs "bootstrap form" b
+<div class="container">
+	<form role="form" action="<?php echo $post; ?>" method="post">
+		<div class="form-group">
+			<label for="exampleInputEmail1">Email address</label>
+			<input type="email" class="form-control" name="exampleInputEmail1" placeholder="Enter email">
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputPassword1">Password</label>
+			<input type="password" class="form-control" name="exampleInputPassword1" placeholder="Password">
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputFile">File input</label>
+			<input type="file" name="exampleInputFile">
+			<p class="help-block">Example block-level help text here.</p>
+		</div>
+		<div class="checkbox">
+			<label>
+			<input type="checkbox"> Check me out
+			</label>
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+</div>
+endsnippet
+
+snippet bs "bootstrap glyph icon" b
+<span class="glyphicon glyphicon_$0"></span>
+endsnippet
+
+snippet ?com "php inline html comment" b
+<?php /*
+------------------------
+$0
+------------------------
+*/ ?>
+endsnippet
+
+snippet bs "bootstrap panel" b
+<div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title">${1:title}</h3></div>
+<div class="panel-body">
+${2:body}
+</div></div>
+endsnippet
+
+
+snippet bs "clipboard button" b
+<button
+	class="clipboard_button btn btn-sm btn-default"
+	id="${1:id}"
+	type="button"
+	title="${2:title}"
+	data-clipboard-target="${3:target_id}"
+	data-clipboard-text="${4:default_text}"
+>
+Copy to Clipboard
+</button>
+endsnippet
+
+snippet vd "var dump" b
+var_dump(
+$0
+);
+endsnippet
+
+snippet ppr "print_r" b
+echo "<pre>";
+print_r(
+$0
+);
+echo "</pre>";
+endsnippet
+
+snippet pr "print_r" b
+print_r(
+$0
+);
+endsnippet
+
+snippet prepr "pre wrppaed print_r" b
+echo "<pre>";
+print_r(
+$0
+);
+echo "</pre>";
+endsnippet
+
+snippet ve "var export" b
+var_export(
+$0
+);
+endsnippet
+
+snippet single "Singleton Class Contructor" b
+/** Instance variable defaults to null, when null a new one will be created */
+protected static $instance = null;
+
+/**
+ * Get Instance of self, if exists, otherwise create one
+ * @version `date "+%Y-%m-%d %H:%M"`
+ * @return ${1:`!p snip.rv = snip.fn.replace('.php','')`}
+ */
+public static function getInstance() {
+	if (is_null(self::$instance)) { self::$instance = new self; }
+	return self::$instance;
+}
+
+/**
+ * Consructor
+ */
+protected function __construct() {
+	$0
+}
+endsnippet
+
+snippet single "Multi Singleton Class Contructor" b
+/** Instance variable defaults to null, when null a new one will be created */
+protected static $instance = null;
+
+/**
+ * Get Instance of self, if exists, otherwise create one
+ * @version `date "+%Y-%m-%d %H:%M"`
+ * @return ${1:`!p snip.rv = snip.fn.replace('.php','')`}
+ */
+public static function getInstance() {
+	self::$instance = new self; 
+	return self::$instance;
+}
+
+/**
+ * Consructor
+ */
+protected function __construct() {
+	$0
+}
+endsnippet
+
+snippet mult "Multiton Class Constructo" b
+/** instances
+ * @var array  Holds instances of ourselves
+ */
+protected static $instances = array();
+
+/**
+ * Get Multiple Instances of class depending on what is passed
+ * @version `date "+%Y-%m-%d %H:%M"`
+ * @return RedCache
+ */
+protected static function getInstance($prefix) {
+	if (!isset(self::$instances[$prefix])) {
+		self::$instances[$prefix] = new self($prefix);
+	}
+	return self::$instances[$prefix];
+}
+endsnippet
+
+snippet ia "initilize array" b
+$${1:arr} = array(); //init $1
+endsnippet
+
+snippet ifa "If Empty Array" b
+if(empty($${1:arr})) $$1 = array(); //INIT array $1
+$0
+endsnippet
+
+snippet ifak "if array key exists" b
+if(array_key_exists($${1:needle},$${2:haystack})) $0
+endsnippet
+
+
+snippet ifn "If Number" b
+if(empty($${1:number})) $$1 = 0;
+$1++;
+$0
+endsnippet
+
+snippet bt "debug Backtrace" b
+print_r(debug_backtrace());
+print_r(debug_print_backtrace());
+endsnippet
+
+snippet logf "logilfe writer" b
+$log = '/tmp/blarg.txt';
+$fh = fopen($log,'w');
+fwrite($fh,"log:$tmp => $var\n");
+fclose($fh);
+endsnippet
+
+snippet pad "Pad with Zeros" b
+$var = sprintf("%02d",$val);  //pad 2 zeros
+endsnippet
+
+snippet e "Exit statment" b
+exit;
+endsnippet
+
+snippet pbr "page break" b
+<p style="page-break-after:always;"></p>
+endsnippet
+
+snippet mssql "mssql connect string" b
+$timeout = 600; //10 minutes for timeout
+ini_set('mssql.timeout', $timeout);
+ini_set('mssql.charset',"UTF-8");
+$host='host';
+$port = 1433;
+$username = ''
+$password = ''
+$sql = mssql_connect("$host:$port",$username,$password);
+
+if(!$sql) {
+   $err = mssql_get_last_message();
+   echo "MSSQL Connect Error $err\n";
+}
+
+$query = file_get_contents($file);
+mssql_query("SET ANSI_NULLS ON");
+mssql_query("SET ANSI_WARNINGS ON");
+
+$out = array();
+while($arr = @mssql_fetch_assoc($statement)) {
+   $out[] = $arr;
+}
+
+if(empty($out)) {
+   $err = mssql_get_last_message();
+   echo "Result Executed OK: But Results Empty: $err\n";
+}
+endsnippet
+
+snippet na "new action" b
+/**
+ * ${2:Short Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+public function ${1:FunctionName}() {
+	$0
+}
+endsnippet
+
+snippet f "form calendar dropdown" b
+<div class="form-group">
+	<script type="text/javascript">
+	$(document).ready(function() { //Autoload
+		/*
+		date = "L"
+		*/
+		createEpochCalendarPicker("L",'<?php echo $${1:var_name}; ?>','#${2:picker_id}','#$1');
+	});
+	</script>
+	<input type="hidden" name="$1" id="$1">
+	<div class='input-group date' placeholder="DateTime" id='$2'>
+		<input type='text' class="form-control" />
+		<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+	</div>
+</div>
+endsnippet
+
+snippet bs "grid" b
+<div class="row">
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+</div>
+<div class="row">
+  <div class="col-md-8">.col-md-8</div>
+  <div class="col-md-4">.col-md-4</div>
+</div>
+<div class="row">
+  <div class="col-md-4">.col-md-4</div>
+  <div class="col-md-4">.col-md-4</div>
+  <div class="col-md-4">.col-md-4</div>
+</div>
+<div class="row">
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		Level1: .col-md-8
+		<div class="row">
+  			<div class="col-md-6">Level2: .col-md-6</div>
+  			<div class="col-md-6">Level2: .col-md-6</div>
+		</div>
+	</div>
+</div>
+endsnippet
+
+snippet nf "Description" i
+number_format(
+,2);
+
+endsnippet
+
+snippet bs "label" b
+<span class="label label-default"></span>
+endsnippet
+
+snippet h1 "header" b
+<h1>$0</h1>
+endsnippet
+
+snippet redis "redis quick init" b
+$r = new Redis();
+$r->connect('localhost');
+$key = __CLASS__;
+if(!$json = $r->get($key)) {
+	$arr = $0;
+	$arr = json_encode($arr);
+	$r->set($key,$arr);
+	$arr = json_decode($arr,true);
+} else {
+	$arr = json_decode($r->get($key),true);
+}
+endsnippet
+
+snippet ?: "short if" b
+$val = (($0)) ? $true : $false;
+endsnippet
+
+snippet dates "date array" b
+$start = new DateTime('1/1/2013');
+$end = new DateTime('4/1/2015');
+$interval = new DateInterval('P1D');
+$dates = array();
+do {
+	$b = $start->getTimestamp();
+	$start->add($interval);
+	$e = $start->getTimestamp();
+	$dates[] = array($b,$e);
+} while ($start < $end);
+endsnippet
+
+snippet dtr  "date time round" b
+//rounding up to closest hour
+$epoch = $module_args['end_epoch'];
+$mod = ($epoch % (60*60));
+$epoch = ($mod == 0) ? $epoch : ($epoch - $mod) + 60*60;
+endsnippet
+
+snippet rows "php table/rows template" b
+$header = reset($rows);
+$header = array_keys($header);
+$header = "<tr><th>" . implode("</th><th>",$header) . "</th></tr>\n";
+
+$rows_html = array();
+foreach ($rows as $idx => $r){
+	$rows_html[] = "<tr><td>" . implode("</td><td>",$r) . "</td></tr>";
+}
+$rows_html = implode("\n",$rows_html);
+endsnippet
+
+snippet rand "quick and dirty random hash generator" b
+$rand = sha1(uniqid(mt_rand().'.',true));
+endsnippet
+
+snippet app "form checkbox" b
+$vals = array(
+	'Option1'=>true,
+	'Option2'=>false,
+	'Option3'=>false,
+);
+$checkbox_types = array('vals'=>$vals,'class'=>'types');
+<div class="form-group"><label>Selected Types:</label>
+<?php
+echo view::show('app/checkboxes',$checkbox_types);
+?>
+</div>
+endsnippet
+
+snippet app "form radio" b
+$radio_${1:name} = array(
+   'val'=>'1',
+   'args'=>array('On'=>1,'Off'=>0),
+   'id'=>'$1',
+   'label'=>'${2:label}',
+);
+$2_html = view::show('app/radio',$radio_$1);
+endsnippet
+
+snippet app "form dropdown" b
+$${1:dropdown_var} = array(
+   'vals'=>array(
+      'Display1'=>'Value1',
+      'Display2'=>'Value2',
+   ),
+   'id'=>'$1',
+   'selected'=>'Value1', //default
+);
+$1_html = view::show('app/dropdown',$$1);
+endsnippet
+
+snippet app "ui table view" b
+$rows = array();
+<h1>Title</h1>
+<?php echo view::show('app/table',array(
+	'rows'=>$rows,
+	'uid'=>uniqid('table'),
+	'nocsv'=>false,
+	'no_header'=>false,
+	'caption'=>'',
+	'class'=>'',
+));?>
+endsnippet
+
+snippet app "ui info block" b
+$details['caption'] = 'Details';
+$details['hide'] = true; //make button toggle hide
+$details['nocsv'] = true; //dont export to CSV
+$details['cells']['description1'] = $value1;
+$details['cells']['description2'] = $value2;
+$details_content = view::show('app/table_info',$details);
+endsnippet
+
+snippet app "ui navigation links" b
+$map = array(
+   'base'=>'/production/monthcompare',
+	'epoch'=>$epoch,
+	'type'=>'month',
+	'params'=>array('arg'=>'val'),
+);
+$nav_links = view::show('app/navlinks',$map);
+endsnippet
+
+snippet app "submit form-redirect" b
+<span data-url='${1:url}' class='form-redirect btn btn-default'>${2:Submit}</span>
+endsnippet
+
+snippet app "submit form-post" b
+<span data-url='${1:url}' class='form-post btn btn-default'>${2:Submit}</span>
+endsnippet
+
+snippet app "ui dialog" b
+$${1:varname} = view::show('standard/dialog',array(
+	'title' => "${2:title}"
+	,'id' => "${3:id}"
+	,'link_content' => "${4:link_content}"
+	,'body' => "${5:body}"
+));
+endsnippet
+
+snippet html "Make new HTML tempate" b
+<!DOCTYPE html>
+<html>
+<head>
+<title>${1:title}</title>
+</head>
+<body>
+$0
+</body>
+</html>
+endsnippet
+
+snippet html "dd list" b
+<dl>
+	<dt>Coffee</dt>
+		<dd>Black hot drink</dd>
+	<dt>Milk</dt>
+		<dd>White cold drink</dd>
+</dl>
+endsnippet
+
+snippet html "unordered list" b
+<ul>
+<li>Coffee</li>
+<li>Tea</li>
+<li>Milk</li>
+</ul>
+endsnippet
+
+snippet html "ordered list" b
+//type="1"typeThe list items will be numbered with numbers (default)
+//type="A"typeThe list items will be numbered with uppercase letters
+//type="a"typeThe list items will be numbered with lowercase letters
+//type="I"typeThe list items will be numbered with uppercase roman numbers
+//type="i"typeThe list items will be numbered with lowercase roman numbers
+<ol type="1">
+	<li>Coffee</li>
+	<li>Tea</li>
+	<li>Milk</li>
+</ol>
+endsnippet
+
+snippet obj "new std Object" b
+$${1:varname} = new stdClass();
+$$1->property = NULL;
+$$1 = json_encode($$1);
+endsnippet
+
+snippet app "app DTPicker" b
+$dt_config = new stdClass();
+$dt_config->epoch = $epoch;
+$dt_config->varname = 'epoch';
+$dt_config->viewmode = NULL; //day,months,years
+$dt_config->format = 'L LT'; //see moment format
+$dt_config->container = 'dtselect';
+$dt_config = json_encode($dt_config);
+
+<div id='dtselect'></div>
+<script type="text/javascript">
+var dt = new DTPicker(<?php echo $dt_config;?>);
+</script>
+endsnippet
+
+snippet trace "Show Performance Trace" b
+$fn = xdebug_start_trace();
+//code here
+xdebug_stop_trace();
+echo file_get_contents($fn);
+unlink($fn);
+endsnippet

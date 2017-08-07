@@ -1,0 +1,223 @@
+snippet com "comment" b
+/*
+$0
+*/
+endsnippet
+
+snippet comb "Big Comment" b
+/* ====================================================
+=======================================================
+$0
+=======================================================
+==================================================== */
+endsnippet
+
+snippet file "File name" i
+`!p snip.rv = snip.fn`
+endsnippet
+
+snippet doc "File Doc Block" b
+/**
+ * ${1: Description} ${2:
+ * @param {${3:string}} ${4:varname} ${5:description}}
+ */
+endsnippet
+
+snippet ex "example" 
+@example
+* <code>
+* <br>
+* </code>
+endsnippet
+
+snippet for "for object" b
+for(var ${1:key} in ${2:obj}) {
+	v = $2[$1];
+}
+endsnippet
+
+snippet for "For array" b
+for (var ${1:i} = 0; $1 < ${2:array}.length; $1++) {
+   var v = $2[$1];
+}
+endsnippet
+
+snippet js "jquery normal starter" b 
+if (typeof jQuery != 'undefined') { $(document).ready(function() { //Autoload
+$0
+/* Autoload END */
+});}
+endsnippet
+
+snippet js "jquery UI starter" b 
+if (typeof jQuery.ui != 'undefined') { $(document).ready(function() { //Autoload
+$0
+/* Autoload END */
+});}
+endsnippet
+
+snippet jq "jquery event pass" b
+$("${1:element}").${2:click}(function(){
+$0
+});
+endsnippet
+
+snippet newf "MODULE - constructor" b
+/*
+ * ${1:`!p snip.rv = snip.fn.replace('.js','')`} : ${2:Application File Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+'use strict';
+module.exports = (function(){ function $1(options) {
+   var self = this;
+   self.setDefaults = ClassDefaults.setDefaults.bind(self);
+   self.setDefaults(options,{
+      'string':'string',
+      'object':{},
+      'array':[],
+      'number':200
+   });
+
+   function test() {
+      return 'test run';
+   }
+   self.test = test;
+
+} return $1;})();
+/*
+require("../main.js");
+//for testing only... otherwise you will get teh bloat (o).(o)
+global.$ = require('jquery')(require("node-jsdom").jsdom().parentWindow);
+var $1 = require("./$1.js");
+var t = new $1;
+console.log($1.test());
+*/
+endsnippet
+
+snippet newf "MODULE - singleton" b
+/*
+ * ${1:`!p snip.rv = snip.fn.replace('.js','')`} : ${2:Application File Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+'use strict';
+module.exports = (function() {
+	var self = {};
+	$0
+
+	return self;
+})();
+endsnippet
+
+snippet newf "BLANK - Immediately-Invoked Function Expression (IIFE)" b
+/*
+ * ${1:`!p snip.rv = snip.fn.replace('.js','')`} : ${2:Application File Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+'use strict';
+;(function() {
+$0
+})();
+endsnippet
+
+snippet newf "new file ready closure" b
+/*
+ * ${1:`!p snip.rv = snip.fn.replace('.js','')`} : ${2:Application File Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+ $(document).ready(function() { //Autoload
+
+ });
+$0
+endsnippet
+
+snippet while "while loop" b
+i = 0;
+max = 10;
+while(i > max) {
+	$0
+}
+endsnippet
+
+snippet if "ternary" b
+return x > y ? "X greater than Y" : "Y greater than = X";
+endsnippet
+
+snippet do "do while" b
+i = 0;
+max = 10;
+do {
+	$0
+} while (i > max) 
+endsnippet
+
+snippet ajax "ajax request" b
+$.ajax({
+	dataType: 'json',
+	method: 'POST',
+	url: submit_url ,
+	data: post_data,
+	success: function() { },
+	beforeSend : function() { },
+	error: function(obj) { },
+	complete: function() { },
+	timeout: 5000
+});
+endsnippet
+
+snippet cw "console warn" b
+console.warn($0);
+endsnippet
+
+snippet jsdom "jsdom starter" b
+jsdom = require("node-jsdom").jsdom;
+document = jsdom("hello world");
+window = document.parentWindow;
+jQuery = require("jquery");
+$ = jQuery;
+window.jQuery = jQuery;
+window.$ = jQuery;
+endsnippet
+
+snippet me "Make function" b
+/**
+ * ${2: Description} ${3:
+ * @param {${4:string}} ${5:varname} ${6:description}}
+ */
+function ${1:name}($5) {
+}
+self.$1 = $1;
+endsnippet
+
+snippet el "jquery generic element" b
+var ${1:name} = $("<$1/>"${2:,{
+	html: 'Display',
+	'class': 'btn btn-default',
+	'click': function() {
+	},
+	'css':''
+}});
+endsnippet
+
+snippet el "jquery div element" b
+var ${1:name} = $("<div/>"${2:,{ id: '$1' }});
+endsnippet
+
+snippet ol "On load / Document Ready" b
+$(document).ready(function(){ $0 });
+endsnippet
+
+snippet throw "Throw Error" i
+{
+	var msg = "${1:error message}";
+	throw msg;
+}
+endsnippet
+
+snippet sleep "sleep loop" b
+(function myLoop (i) {          
+   setTimeout(function () {   
+      //code goes here
+      if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
+   },1000)
+})(100);  
+endsnippet

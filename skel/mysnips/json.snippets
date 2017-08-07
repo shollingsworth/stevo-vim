@@ -1,0 +1,7 @@
+snippet aws "aws reference" 
+{ "Ref": "$0" }
+endsnippet
+
+snippet aws "join a list of values" b
+{ "Fn::Join" : ["-", [ $0 ] ]}
+endsnippet

@@ -1,0 +1,279 @@
+priority 10
+
+snippet file "File name" i
+`!p snip.rv = snip.fn`
+endsnippet
+
+snippet s10 "select top 10 *" b
+select
+top 10
+*
+from $0
+endsnippet
+
+
+snippet com "comment" 
+/*
+$0
+*/
+endsnippet
+
+snippet bcom "big comment" 
+---------------------------------------------------------------------------------
+-- $0
+---------------------------------------------------------------------------------
+endsnippet
+
+
+snippet v "varchar" 
+varchar(512)
+endsnippet
+
+snippet dup "Duplicate Rows on the same table" 
+${VISUAL:/\[(\w+)\]/v1.[$1] as [$1_v1]/g}
+${VISUAL:/\[(\w+)\]/v2.[$1] as [$1_v2]/g}
+endsnippet
+
+snippet newt "new temp table" b
+declare @${1:name} table ( $0
+	[rid] int identity(1,1)
+	,[col] varchar(50)
+)
+endsnippet
+
+
+snippet new "New @return or table type" b
+declare @${1:name} table ( $0
+-- IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[$1]') AND type in (N'U')) DROP TABLE [$1]
+--create table $1 (
+-- ADD UNIQUE to end if you want the value to be unique
+-- ADD int identity(1,1) for identity rows
+	${VISUAL:/\[(\w+)\]/[$1] sql_variant/g}
+/*
+	CONSTRAINT [$1_PK] PRIMARY KEY CLUSTERED (
+	${VISUAL:/\[(\w+)\]/[$1]/g}
+	)
+	WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+	on [PRIMARY]
+*/
+)
+--GRANT SELECT,UPDATE,INSERT,DELETE ON $1 TO ?
+endsnippet
+
+snippet ins "insert statment" b
+insert into $0 (
+${VISUAL:/\[(\w+)\]/[$1]/g}
+) VALUES (
+${VISUAL:/\[(\w+)\]/''/g}
+)
+endsnippet
+
+snippet up "update statement" b
+UPDATE $0 
+SET
+${VISUAL:/\[(\w+)\]/[$1] = /g}
+where [id] = 
+endsnippet
+
+snippet del "delete statement" b
+DELETE FROM $0 
+where [id] = 
+endsnippet
+
+snippet case "Case WHEN" b
+,CASE
+	WHEN [val] = 'val' THEN 'val'
+	ELSE 'val'
+	END
+endsnippet
+
+snippet rn "create rownuber fiel" b
+ROW_NUMBER() OVER (PARTITION BY ${1:NULL} ORDER BY [${2:dt}]) as [${3:rid}]
+endsnippet
+
+snippet dd "Date Diff" b
+DATEDIFF(${1:second},${2:GETDATE()},${3:DATEADD(day,1,GETDATE())})
+endsnippet
+
+snippet piv "Pivot Insert Convert Columns to Value"
+PIVOT (${1:AVG}([${2:val}]) FOR [${3:col}] in (
+      [${10:column_to_val}]
+      ${19:,[${20:column_to_val}]}
+      ${29:,[${30:column_to_val}]}
+      ${39:,[${40:column_to_val}]}
+      ${49:,[${50:column_to_val}]}
+)) as PIV
+endsnippet
+
+snippet unpiv "UNPivot Insert - Convert Values to Columns"
+UNPIVOT ([${2:val}] FOR [${3:col}] in (
+      [${10:val_to_column}]
+      ${19:,[${20:val_to_column}]}
+      ${29:,[${30:val_to_column}]}
+      ${39:,[${40:val_to_column}]}
+      ${49:,[${50:val_to_column}]}
+)) as UNPIV
+endsnippet
+
+snippet tally "tally table variable" b
+declare @tally table (
+	n int
+)
+insert into @tally
+select
+top 100
+ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) as [n]
+from sysobjects T1
+cross join sysobjects T2
+cross join sysobjects T3
+endsnippet
+
+snippet while "while loop" b
+declare 
+	@${1:idname} int
+
+select @$1 = min([${2:rowname}]) from @${3:table}
+while @$1 is not null BEGIN
+	/* stuff here */
+	select @$1 = min([$2]) from @$3 where [$2] > @$1
+END 
+endsnippet
+
+snippet sp "Stored Procedure" b
+/* =============================================
+Author           : Steven Hollingsworth
+Create date      : `date "+%Y-%m-%d %H:%M"`
+Stored Proc Name : $2
+Description      : ${1:Description Of program}
+============================================= */
+create procedure ${2:sp_name}
+@var1 int
+,@var2 varchar(500)
+as 
+--Program Here
+GO 
+endsnippet
+
+snippet fun "sql function" b
+/* =============================================
+Author     : Steven Hollingsworth
+Create date: `date "+%Y-%m-%d %H:%M"`
+Function   : $2
+Description: ${1:Description Of program}
+============================================= */
+
+CREATE FUNCTION [dbo].[${2:function_name}] (
+   @tag varchar(500)
+   ,@b datetime
+   ,@e datetime
+) 
+
+RETURNS
+
+@ret table (
+   [tag] varchar(500)
+   ,[dt] datetime
+   ,[val] float
+) 
+
+AS BEGIN
+-- program here
+RETURN
+END
+endsnippet
+
+snippet vc "varchar" 
+varchar(500)
+endsnippet
+
+snippet con "convert" i
+$0CONVERT(${1:varchar(500)},
+endsnippet
+
+
+snippet _dt  "datetime" 
+datetime 
+endsnippet
+
+
+snippet newf "New File Header" b
+use ${1:DB}
+/*
+ * ${2:`!p snip.rv = snip.fn.replace('.sql','')`} : ${3:SQL File Description}
+ * @version `date "+%Y-%m-%d %H:%M"`
+ */
+
+declare $0
+endsnippet
+
+snippet app "Variable template" b
+declare
+	@b datetime,
+	@e datetime
+
+---------------------------------------------------------------------------------
+-- Test
+---------------------------------------------------------------------------------
+/*
+select
+	@e = GETDATE(),
+	@b = DATEADD(day,-7,@e)
+*/
+
+---------------------------------------------------------------------------------
+-- Production
+---------------------------------------------------------------------------------
+/*
+select
+	@b = '{{START_DATE}}',
+	@e = '{{END_DATE}}'
+*/
+endsnippet
+
+snippet app "right pad zero" b
+'Z' + RIGHT('000'+CAST([n] as varchar(3)),3) as [Zpad]
+endsnippet
+
+snippet app "Replace" b
+REPLACE (${1:string_expression} , ${2:string_pattern} , ${3:string_replacement}) as ${4:alias}
+endsnippet
+
+snippet app  "with" b
+;with ${1:cte_name} as (
+$0
+)
+endsnippet
+
+snippet app "substring" b
+SUBSTRING (${1:expression} , ${2:start} , ${3:length}) as [${4:alias}]
+endsnippet
+
+snippet app "TRY CATCH Block" b
+declare @errmsg varchar(500)
+BEGIN TRY
+	SELECT 1/0
+END TRY
+BEGIN CATCH
+	SELECT @errmsg = CONVERT(varchar(500),ERROR_NUMBER()) + ' ' + ERROR_MESSAGE()
+END CATCH
+endsnippet
+
+snippet app "unix epoch" b
+DATEDIFF(second,'01-01-1970 00:00:00',
+endsnippet
+
+snippet app "RAISE ERROR" b
+RAISERROR('${1:msg}',0,1) WITH NOWAIT
+endsnippet
+
+snippet app "Join offset" b
+select
+D1.*
+,ISNULL(D2.[${1:measure}],D1.[$1]) - D1.[$1] as [diff]
+from ${2:table} D1
+left join $2 D2 on (
+	D2.[rid] = D1.[rid] + 1
+	and
+	D2.[${3:ID}] = D1.[$3]
+)
+endsnippet

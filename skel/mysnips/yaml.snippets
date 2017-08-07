@@ -1,0 +1,26 @@
+snippet hiera "hiera variable reference (string)" b
+"%{hiera('${1:varname}')}"
+endsnippet
+
+snippet aws "aws join function" b
+!Join 
+  - '-'
+  - - vpn
+    - !Ref VpnName
+endsnippet
+
+snippet aws "param" b
+${1:ParamName}:
+  Description: ${2:Param Description}
+  Type: String
+  Type: Number
+  Type: CommaDelimitedList
+  Type: "AWS::EC2::Subnet"
+endsnippet
+
+snippet aws "template output" b
+Outputs:
+${1:OutputName}:
+  Description: ${2:Description}
+  Value: !Ref $1
+endsnippet
