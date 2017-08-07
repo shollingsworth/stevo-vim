@@ -1,7 +1,5 @@
 #!/bin/bash
-
 file=$1
-
 function check_arg {
    if [[ -n ${file} ]]; then
       file=$(readlink -e ${file})

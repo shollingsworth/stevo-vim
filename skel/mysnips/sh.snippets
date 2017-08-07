@@ -1,6 +1,5 @@
 priority 10
 
-#`!p snip.rv = '#!/usr/bin/env bash\n\n'`
 snippet #!
 #!/usr/bin/env bash
 set -euo pipefail
@@ -15,17 +14,17 @@ endsnippet
 
 snippet join "join function" b
 join_by() {
-	#join_by "," ("1","2","3")
+    #join_by "," ("1","2","3")
     local IFS="$1"; shift; echo "$*";
 }
 endsnippet
 
 snippet stat "stat file time" b
 if [ -f ${1:${VISUAL}} ]; then
-	now=$(date +%s)
-	fe=$(stat --printf="%Y" ${1:${VISUAL}})
-	diff=$((${now} - ${fe}))
-	echo "${diff}"
+    now=$(date +%s)
+    fe=$(stat --printf="%Y" ${1:${VISUAL}})
+    diff=$((${now} - ${fe}))
+    echo "${diff}"
 fi
 endsnippet
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 IFS=$'\n\t'
-
 mydir=$(dirname $0)
 
 err() {

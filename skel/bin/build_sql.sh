@@ -1,6 +1,5 @@
 #!/bin/bash
-
-file=$1
+file="${1?"argv[1]: file"}"
 
 function check_arg {
    if [[ -n ${file} ]]; then

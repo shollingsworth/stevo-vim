@@ -1,9 +1,6 @@
 #!/bin/bash
-
-exit
-
-src=$1
-run_only=$2
+src="${1?"arvg[1]: src"}"
+run_only="${2?"argv[2]: run_only"}"
 run=$(echo $(basename $1) | sed 's/\.java//')
 basedir=$(echo $(dirname $1))
 compat7=0;
