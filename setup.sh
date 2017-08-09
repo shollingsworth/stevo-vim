@@ -89,6 +89,7 @@ copy_files() {
 }
 
 install_plugins() {
+    rm -rfv ~/.vim/bundle/*
     pushd ~/.vim/bundle || err "Error changing directory to install plugin"
     for clone in ${clones[@]}; do
         git clone ${clone} || err "Error cloning ${clone}!"
