@@ -57,7 +57,6 @@ i_hate_centos_7() {
     opts+=("--prefix=/usr")
     opts+=("--with-features=huge")
     opts+=("--enable-pythoninterp")
-    #--with-python-config-dir=/usr/lib64/python2.7/config
     ./configure ${opts[@]} || {
        echo "Error compiling"
        exit -1
@@ -71,7 +70,7 @@ install_pathogen() {
         centos)
             mkdir -p ~/repos
             pushd ~/repos
-            #git clone ${git_pathogen}
+            git clone ${git_pathogen}
             clone_dir=$(echo ${git_pathogen} | awk -F '/' '{print $NF}' | sed 's/\.git$//')
             cp -av ${clone_dir}/autoload ~/.vim
             i_hate_centos_7
