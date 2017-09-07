@@ -109,3 +109,6 @@ copy_files
 install_plugins
 submodule_updates
 install_pathogen
+echo "=============================="
+echo "vim install DONE!"
+echo "=============================="
