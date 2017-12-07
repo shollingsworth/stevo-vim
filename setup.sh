@@ -30,6 +30,12 @@ err() {
     exit -1
 }
 
+install_fzf() {
+    echo "Installing FZF"
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+}
+
 check_git() {
     which git &>/dev/null || err "Error, please install git first"
 }
