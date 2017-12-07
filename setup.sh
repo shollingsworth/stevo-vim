@@ -39,7 +39,8 @@ i_hate_centos_7() {
     yum clean all
     yum -y groupinstall "Development tools"
     yum -y install ncurses ncurses-devel
-    yum install -y ruby ruby-devel lua lua-devel luajit luajit-devel ctags git python python-devel python3 python3-devel tcl-devel perl perl-devel perl-ExtUtils-ParseXS perl-ExtUtils-XSpp perl-ExtUtils-CBuilder perl-ExtUtils-Embed
+    yum install -y ruby ruby-devel lua lua-devel luajit luajit-devel ctags git python python-devel python3 python3-devel tcl-devel perl perl-devel perl-ExtUtils-ParseXS perl-ExtUtils-XSpp perl-ExtUtils-CBuilder perl-ExtUtils-Embed yum-plugin-versionlock
+    yum versionlock vim-*
     pushd /usr/local/src
     test -d vim && rm -rfv vim
     git clone https://github.com/vim/vim.git
